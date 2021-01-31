@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+echo "What is the url to the mixin?"
+read url
+
+echo "What branch? (leave blank for master)"
+read which_branch
+
+if [[ -z "$which_branch" ]]
+then
+    which_branch="master"
+else
+    which_branch="$1"
+fi
+
+# remove any leftover ones (caused by git merge conflicts)
+git remote remove __mixin__ &>/dev/null
+git remote add __mixin__ "$url"
+git fetch __mixin__ --tags
+git merge --allow-unrelated-histories "__mixin__/$which_branch"
+git remote remove __mixin__ &>/dev/null

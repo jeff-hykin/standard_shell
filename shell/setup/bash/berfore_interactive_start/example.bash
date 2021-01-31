@@ -1,0 +1,1 @@
+# this is where you would set something like enabling terminal colors
