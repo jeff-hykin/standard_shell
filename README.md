@@ -9,7 +9,7 @@ Hopefully anyone on a unix based systems (including WSL)
 Download this repository, and then run the "initilize_standard_shell.bash" file that is inside `shell -> setup -> bash`. If your comfy with the command line:
 ```
 git clone https://github.com/jeff-hykin/standard_shell.git
-bash standard_shell/shell/setup/bash/initilize_standard_shell.bash
+zsh standard_shell/shell/setup/zsh/initilize_standard_shell.zsh
 ```
 
 ## How does it work?
