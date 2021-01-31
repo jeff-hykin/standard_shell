@@ -20,6 +20,8 @@ do
 done
 export PATH="${PATH}:$__user_commands_path__"
 
+__setup_folder__="$SHELL_SOURCE/setup/bash/"
+
 # 
 # load setup
 # 
