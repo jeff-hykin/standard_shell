@@ -32,7 +32,7 @@ function move_out_of_the_way {
 # link the shell folder
 # 
 move_out_of_the_way "$HOME/.config/shell"
-cp -r "$folder_containing_this_file/shell" "$HOME/.config/shell"
+cp -r "$folder_containing_this_file/../../" "$HOME/.config/shell"
 
 # this is normally protected, don't touch it: etc/profile
 # this is normally protected, don't touch it: /etc/bashrc
