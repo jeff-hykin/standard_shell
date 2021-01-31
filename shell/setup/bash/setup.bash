@@ -23,8 +23,8 @@ export PATH="${PATH}:$__user_commands_path__"
 # 
 # load setup
 # 
-mkdir -p "$__setup_folder__/berfore_start/"
-for file in "$__setup_folder__/berfore_start/"*
+mkdir -p "$__setup_folder__/before_start/"
+for file in "$__setup_folder__/before_start/"*
 do
     # make sure its a file
     if [[ -f "$file" ]]; then
