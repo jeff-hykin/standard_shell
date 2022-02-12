@@ -3,11 +3,13 @@ const { Console, FileSystem } = await import("")
 
 
 // required tools (that arent built/imported)
+    // FileSystem.append
     // recursivelyEveryKeyValue(obj)
     // set(obj, keyList, value)
     // get(obj, keyList)
     // generateEventFileNames([ {name:name, placement: [0,0,0], path: "filepath" } ])
-
+    // getParentShell
+    // getPidOfThisProcess
 
 async function getShellCompilers() {
     const standardShellApi = [
@@ -44,6 +46,40 @@ async function getShellCompilers() {
             // TODO: error 
         }
     }
+}
+const compilers = getShellCompilers()
+
+
+const compileOutputPath = `/tmp/shell_manager/${getPidOfThisProcess()}`
+export const ShellManger = {
+    async appendToPath(string) {
+        const path = Console.env.PATH
+        // write to tmp/shell_manager/${this_pid_number}
+        const compiler = compilers[getParentShell()]
+        if (path.length > 0) {
+            const compiledResult = await compiler.set_var("PATH", `${path}:${string}`)
+            FileSystem.append(compileOutputPath, compiledResult)
+        } else {
+            const compiledResult = await await compiler.set_var("PATH", `${string}`)
+            FileSystem.append(compileOutputPath, compiledResult)
+        }
+    },
+    async injectToPath(string) {
+        const path = Console.env.PATH
+        // write to tmp/shell_manager/${this_pid_number}
+        const compiler = compilers[getParentShell()]
+        if (path.length > 0) {
+            const compiledResult = await compiler.set_var("PATH", `${string}:${path}`)
+            FileSystem.append(compileOutputPath, compiledResult)
+        } else {
+            const compiledResult = await await compiler.set_var("PATH", `${string}`)
+            FileSystem.append(compileOutputPath, compiledResult)
+        }
+    },
+    async exportVar(varName, value) {
+        const compiledResult = await await compiler.set_var(varName, `${value}`)
+        FileSystem.append(compileOutputPath, compiledResult)
+    },
 }
 
 
