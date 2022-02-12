@@ -9,6 +9,9 @@ const { Console, FileSystem } = await import("")
     // generateEventFileNames([ {name:name, placement: [0,0,0], path: "filepath" } ])
     // compileGenericScript(obj)
         // 
+    // parseEventNamesIntoOrder(folder_path)
+    // iterativelyReturnEventFilepaths
+
 
 async function getShellCompilers() {
     const standardShellApi = [
