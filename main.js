@@ -19,17 +19,20 @@ const { Console, FileSystem } = await import("")
         // add last step of every event to be setting the path to always have protected commands and commands
     // on generate deno hook
         // figure out placement in hook list
-        // create a file with the name and placement
+        // create a path using the name and placement
         // use the compiler commands to create a compile_deno_hook
-        // embed the whole deno program into the file
-        // have the file execute it using nix
+            // embed the whole deno program into the file
+            // have the file execute it using nix
     // on establish_extension
         // the extension folder when establish_extension is called
         // link things into the commands folder
+        // get the on_start folder
         // source the on_start
 
 async function getShellCompilers() {
+    // TODO: look for interface.js instead
     const standardShellApi = [
+        "create_deno_hook",
         "on_start_folder",
         "establish",
         "set_var",
