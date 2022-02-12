@@ -6,21 +6,6 @@ shell_manager establish_extension <<'HEREDOC'
 name: "YOUR_EXTENSION_NAME"
 version: "YOUR_EXTENSION_VERSION"
 
-# 
-# all the rest are optional 
-# 
-
-# export PATH, but shell-generic
-path:
-    $inject: [ "/bin" ]             # put at the front (highest priority)
-    $append: [ "$HOME/.cargo/bin" ] # put at the back (lowest priority)
-    append: [ "$HOME/cargo/bin" ]   # in bash this be '$HOME' instead of "$HOME"
-
-# add a single command instead of adding folder of commands
-commands:
-    - name: "COMMAND_NAME"
-      path: "PATH_TO_COMMAND"
-
 # the lazy way to do shell-specific things (defaults to rc file, defaults to running after existing stuff in rc file)
 hardcoded:
     bash: |
@@ -32,18 +17,18 @@ hardcoded:
         setopt extended_glob &>/dev/null
 
 # lazy way for generic (defaults to running these on_start (similar to rc))
-generic:
-    # "var", "check", "if", "execute", "exists", "all", "one_of" are from the shell manager API
+generic: |
+    const { ShellManager, Console, FileSystem } = await import("")
     
-    - var: PATH
-      $colon-append: "$HOME/.cargo/bin"
+    const pwd = await Console.run("pwd", Console.run.Stdout(Console.run.returnAsString))
+    ShellManager.appendToPath(`${pwd}/node_modules/.bin/`)
+    ShellManager.addCommand({
+        name: "default_shell",
+        path: "/bin/sh",
+    })
+    // wrap this in a function and set the extension name/version using an imported symbol stored on global so that 
+    // the ShellManager.addCommand is able to learn the extension name/version
     
-    - check:
-        if: $exists: "$HOME/.cargo/bin"
-        then:
-            - var: PATH
-              $colon-append: "$HOME/.cargo/bin"
-
 # professional way to do shell-specific things
 hardcoded:
     bash:
