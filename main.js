@@ -7,15 +7,6 @@ const { Console, FileSystem } = await import("")
     // set(obj, keyList, value)
     // get(obj, keyList)
     // generateEventFileNames([ {name:name, placement: [0,0,0], path: "filepath" } ])
-    // compileGenericScript(obj)
-        // var
-        // execute
-        // check
-        // exists
-        // file_exists
-        // folder_exists
-    // parseEventNamesIntoOrder(folder_path)
-    // iterativelyReturnEventFilepaths
 
 
 async function getShellCompilers() {

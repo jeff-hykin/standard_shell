@@ -86,12 +86,19 @@ generic:
         -
             name: add_cargo_bin
             default_placement: [ 4, 2, 2 ]
-            do:
-                - check:
-                    if: $exists: "$HOME/.cargo/bin"
-                    then:
-                        - var: PATH
-                          $colon-append: "$HOME/.cargo/bin"
+            do: |
+                const { ShellManager } = await import("")
+                const { Console, FileSystem } = await import("")
+                
+                const cargoPath = `${FileSystem.home}/.cargo/bin`
+                if (FileSystem.exists(`${FileSystem.home}/.cargo/bin`)) {
+                    ShellManager.appendToPath(cargoPath)
+                }
+            # this^ gets wrapped in a funciton and put inside a file like do_stuff.js
+            # then another file is created in the shell's native syntax
+            # /bin/bash
+            # ./do_stuff.js
+            # source "/tmp/shell_manager/$!" # source the compiled output from runnning the shell_manager_js file
         -
             name: setup_cuda
             default_placement: [ 7, 2, 5]
