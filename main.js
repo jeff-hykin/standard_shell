@@ -11,15 +11,28 @@ const { Console, FileSystem } = await import("")
     // getParentShell
     // getPidOfThisProcess
 
+// logic work
+    // on init
+        // create folder structure
+        // establish all the shell files like .bashrc
+        // make protected commands
+        // add last step of every event to be setting the path to always have protected commands and commands
+    // on generate deno hook
+        // figure out placement in hook list
+        // create a file with the name and placement
+        // use the compiler commands to create a compile_deno_hook
+        // embed the whole deno program into the file
+        // have the file execute it using nix
+    // on establish_extension
+        // the extension folder when establish_extension is called
+        // link things into the commands folder
+        // source the on_start
+
 async function getShellCompilers() {
     const standardShellApi = [
         "on_start_folder",
         "establish",
-        "execute",
-        "get_var",
         "set_var",
-        "file_exists",
-        "folder_exists",
     ]
     const output = {}
     // ensure that $HOME/settings/shells/ exists
@@ -131,13 +144,11 @@ if (Deno.args[0] == "establish_extension") {
         //             nu/
         //             bash/
         //                 interface/
-        //                     on_start_folder
-        //                     establish
-        //                     execute
-        //                     get_var
-        //                     set_var
-        //                     file_exists
-        //                     folder_exists
+        //                     create_deno_hook filename deno_content
+        //                     on_start_folder [return string "rc"]
+        //                     establish [create the .bashrc and other stuff]
+        //                     set_var varname value
+        //                 interface.js // alternative for faster compilation times
         //                 events/
         //                     profile/
         //                     rc/

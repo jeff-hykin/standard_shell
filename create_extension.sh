@@ -99,21 +99,4 @@ generic:
             # /bin/bash
             # ./do_stuff.js
             # source "/tmp/shell_manager/$!" # source the compiled output from runnning the shell_manager_js file
-        -
-            name: setup_cuda
-            default_placement: [ 7, 2, 5]
-            do:
-                - check:
-                    if: folder_exists: "/usr/local/cuda-10.1/bin/"
-                    then:
-                        - var PATH
-                          $colon-append: "/usr/local/cuda-10.1/bin/"
-                        - var LD_LIBRARY_PATH
-                          $colon-append: "/usr/local/cuda-10.1/lib64"
-                
-                # # would look like this in bash:
-                # if [ -d "/usr/local/cuda-10.1/bin/" ]; then
-                #     export PATH="${PATH}:/usr/local/cuda-10.1/bin/"
-                #     export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/usr/local/cuda-10.1/lib64"
-                # fi
 HEREDOC

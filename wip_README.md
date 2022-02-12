@@ -60,8 +60,6 @@ $HOME/
                         execute
                         get_var
                         set_var
-                        file_exists
-                        folder_exists
                     events/
                         profile/
                         rc/
